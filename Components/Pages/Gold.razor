@@ -1,0 +1,24 @@
+﻿@page   "/gold"
+@rendermode InteractiveServer 
+
+<h3>It's time to get some gold!'</h3>
+
+<p>Add your new gold total: HERE
+</p>
+
+@code {
+    List<GoldTracking> characters = new();
+
+    protected override void OnInitialized()
+    {
+        characters.AddRange(new List<GoldTracking>
+        {
+            new GoldTracking { Name = "The Butthole Surfers", GoldLastSession =  11.99M, GoldThisSession = 11.99M, ImageUrl="img/pizzas/bacon.jpg"},
+            new GoldTracking { Name = "King Gizzard and the Lizard Wizard", GoldLastSession =  12.75M, GoldThisSession = 11.99M, ImageUrl="img/pizzas/meaty.jpg"},
+            new GoldTracking { Name = "Bloodhound Gang", GoldLastSession =  11.5M, GoldThisSession = 11.99M, ImageUrl="img/pizzas/salad.jpg"},
+            new GoldTracking { Name = "Steel Panther", GoldLastSession =  9.99M, GoldThisSession = 11.99M, ImageUrl="img/pizzas/margherita.jpg"},
+            new GoldTracking { Name = "Sawyer", GoldLastSession =  11.99M, GoldThisSession = 11.99M, ImageUrl="img/pizzas/cheese.jpg"},
+            new GoldTracking { Name = "Leon Garber", GoldLastSession =  10.5M, GoldThisSession = 11.99M, ImageUrl="img/pizzas/pepperoni.jpg" }
+        });
+    }
+}
