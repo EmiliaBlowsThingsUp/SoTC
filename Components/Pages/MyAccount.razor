@@ -1,0 +1,107 @@
+﻿@page   "/myaccount"
+@rendermode InteractiveServer 
+<style>
+    .character-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 20rem);
+    grid-gap: 2rem;
+    justify-content: center;
+    padding-left: 0;
+    }
+
+    .character-cards > li {
+    height: 10rem;
+    position: relative;
+    background-size: cover;
+    border-radius: 0.5rem;
+    list-style-type: none;
+    box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+    transition: 0.1s ease-out;
+    }
+
+    .character-cards > li:hover {
+    transform: scale(1.02);
+    }
+
+    .character-info {
+    border-radius: 0.5rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(rgba(0,0,0,0.7) 30%, rgba(0,0,0,0) 80%);
+    padding: 1rem 1rem;
+    color: #fff2cc;
+    cursor: pointer;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+    line-height: 1.25rem;
+    }
+
+    .character-info .title {
+    color: white;
+    font-size: 1.4rem;
+    display: block;
+    margin: 0.2rem 0 0.4rem 0;
+    font-family: 'Bahnschrift', Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    }
+
+    .character-info .price {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0rem 0.7rem;
+    border-radius: 4px;
+    background-color: #08af08;
+    color: white;
+    line-height: 2rem;
+    }
+
+    .price::before {
+    content: '£';
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin-right: 0.2rem;
+    }
+</style>
+<h3>"player account"</h3>
+
+<p>Change account settings here.
+</p>
+<div class="main">
+  <ul class="character-cards">
+    @if (characters != null)
+    {
+      @foreach (var gold in characters)
+      {
+        <li style="background-image: url('@gold.ImageUrl')">
+          <div class="character-info">
+              <span class="title">@gold.Name</span>
+                  @gold.GoldLastSession
+                <span class="price">@gold.GoldThisSession</span>
+          </div>
+        </li>
+      }
+    }
+  </ul>
+</div>
+
+@code {
+    List<GoldTracking> characters = new();
+
+    protected override void OnInitialized()
+    {
+        characters.AddRange(new List<GoldTracking>
+        {
+            new GoldTracking { Name = "The Butthole Surfers", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/bacon.jpg"},
+            new GoldTracking { Name = "King Gizzard and the Lizard Wizard", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/meaty.jpg"},
+            new GoldTracking { Name = "Bloodhound Gang", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/salad.jpg"},
+            new GoldTracking { Name = "Steel Panther", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/margherita.jpg"},
+            new GoldTracking { Name = "Sawyer", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/cheese.jpg"},
+            new GoldTracking { Name = "Leon Garber", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/pepperoni.jpg" }
+        });
+    }
+}
