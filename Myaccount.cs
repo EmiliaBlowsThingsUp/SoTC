@@ -1,6 +1,8 @@
 ﻿namespace SoTC
 {
-    public class Myaccount
-    {
-    }
+            public class MyAccount
+        {
+           
+
+        }
 }

@@ -1,4 +1,4 @@
-﻿@page   "/my-account"
+﻿@page   "/myaccount"
 @rendermode InteractiveServer 
 <style>
     .character-cards {
@@ -88,3 +88,20 @@
     }
   </ul>
 </div>
+
+@code {
+    List<GoldTracking> characters = new();
+
+    protected override void OnInitialized()
+    {
+        characters.AddRange(new List<GoldTracking>
+        {
+            new GoldTracking { Name = "The Butthole Surfers", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/bacon.jpg"},
+            new GoldTracking { Name = "King Gizzard and the Lizard Wizard", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/meaty.jpg"},
+            new GoldTracking { Name = "Bloodhound Gang", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/salad.jpg"},
+            new GoldTracking { Name = "Steel Panther", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/margherita.jpg"},
+            new GoldTracking { Name = "Sawyer", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/cheese.jpg"},
+            new GoldTracking { Name = "Leon Garber", GoldLastSession =  "11.99M", GoldThisSession = "11.99M", ImageUrl="img/pizzas/pepperoni.jpg" }
+        });
+    }
+}
