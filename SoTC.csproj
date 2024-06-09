@@ -13,4 +13,12 @@
     <None Remove="Components\NewFolder\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Components\Layout\Gold.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\Layout\Gold.razor.css" />
+  </ItemGroup>
+
 </Project>

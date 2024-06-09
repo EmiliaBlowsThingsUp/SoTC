@@ -1,4 +1,4 @@
-﻿@page   "/gold"
+﻿@page   "/myaccount"
 @rendermode InteractiveServer 
 <style>
     .character-cards {
@@ -67,9 +67,9 @@
     margin-right: 0.2rem;
     }
 </style>
-<h3>It's time to get some gold!</h3>
+<h3>"player account"</h3>
 
-<p>Add your new gold total: HERE
+<p>Change account settings here.
 </p>
 <div class="main">
   <ul class="character-cards">
@@ -88,6 +88,7 @@
     }
   </ul>
 </div>
+
 @code {
     List<GoldTracking> characters = new();
 
