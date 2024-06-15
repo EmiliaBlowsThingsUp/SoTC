@@ -25,12 +25,13 @@ class AuthFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session()->get('isLoggedIn'))
-        {
+        // Check if user is not logged in
+        if (! session()->has('user_id')) {
+            // Redirect to login page
             return redirect()->to('/login');
         }
     }
- 
+
     /**
      * Allows After filters to inspect and modify the response
      * object as needed. This method does not allow any way
@@ -45,6 +46,6 @@ class AuthFilter implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        // Do something after the controller runs
     }
 }

@@ -4,12 +4,14 @@ namespace App\Controllers;
  
 use App\Controllers\BaseController;
 use App\Models\UserModel;
+use App\Models\GoldModel;
  
 class Register extends BaseController
 {
  
     public function __construct(){
         helper(['form']);
+    
     }
  
     public function index()
@@ -39,6 +41,31 @@ class Register extends BaseController
             $data['validation'] = $this->validator;
             return view('register', $data);
         }
-           
+          
+        $userModel = new UserModel();
+        $userId = $userModel->insert($userData);
+
+        if ($userId) {
+            // Now create a corresponding entry in sotc_goldcount
+            $goldData = [
+                'user_id' => $userId,
+                'gold_count' => 0, // Example initial gold count
+            ];
+
+            $goldModel = new GoldModel();
+            $goldModel->insert($goldData);
+
+            // Optionally, redirect to login page or wherever needed
+            return redirect()->to('/login')->with('success', 'Account created successfully! Please log in.');
+        } else {
+            // Handle registration failure
+            return redirect()->back()->withInput()->with('error', 'Failed to register. Please try again.');
+        }
+
+
     }
 }
+
+
+
+  

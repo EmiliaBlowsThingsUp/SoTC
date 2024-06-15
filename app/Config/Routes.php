@@ -16,3 +16,4 @@ $routes->post('/login', 'Login::authenticate', ['filter' => 'guestFilter']);
  
 $routes->get('/logout', 'Login::logout', ['filter' => 'authFilter']);
 $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'authFilter']);
+$routes->post('dashboard/update-gold-count/(:num)', 'Dashboard::updateGoldCount/$1', ['filter' => 'auth']);
