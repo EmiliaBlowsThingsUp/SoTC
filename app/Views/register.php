@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>User Registration</h1>
-    <form action="/usercontroller/store" method="post">
+    <form action="<?php echo base_url('/register'); ?>" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
 

@@ -104,4 +104,11 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [];
+    public $aliases = [
+        'csrf'     => CSRF::class,
+        'toolbar'  => DebugToolbar::class,
+        'honeypot' => Honeypot::class,
+        'authFilter' => \App\Filters\AuthFilter::class,
+        'guestFilter' => \App\Filters\GuestFilter::class,
+    ];
 }
