@@ -10,8 +10,8 @@ class AddUser extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 255,
+                'type' => 'INT',
+                'constraint' => 100,
                 'unsigned' => true,
                 'auto_increment' => true
             ],
@@ -34,11 +34,11 @@ class AddUser extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey('id');
-        $this->forge->createTable('users');
+        $this->forge->createTable('sotc_users');
     }
  
     public function down()
     {
-        $this->forge->dropTable('users');
+        $this->forge->dropTable('sotc_users');
     }
 }
