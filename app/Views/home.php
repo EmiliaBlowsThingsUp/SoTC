@@ -1,7 +1,7 @@
 <?=$this->extend("layout")?>
   
 <?=$this->section("content")?>
-
-<h1> WOOT </h1>
-
+<div>
+<h1>WOOT</h1>
+</div>
 <?=$this->endSection()?>
