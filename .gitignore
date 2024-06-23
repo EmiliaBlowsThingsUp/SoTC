@@ -16,3 +16,4 @@
 /system
 /app/.vscode
 app/.vscode/extensions.json
+/writable/debugbar
