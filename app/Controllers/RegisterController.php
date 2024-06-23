@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\GoldModel;
+use App\Models\EmissaryModel;
 
 class RegisterController extends BaseController
 {
@@ -30,6 +31,7 @@ class RegisterController extends BaseController
         if ($this->validate($rules)) {
             $userModel = new UserModel();
             $goldModel = new GoldModel();
+            $emissaryModel = new EmissaryModel();
 
             $userData = [
                 'username'   => $this->request->getPost('username'),
@@ -53,6 +55,20 @@ class RegisterController extends BaseController
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
 
+            // Insert reference row into sotc_emmissaries table
+            $emissaryModel->save([
+                'user_id'    => $userId,
+                'gold_hoarders' => 0, 
+                'order_of_souls' => 0, 
+                'merchant_alliance' => 0, 
+                'reapers_bones' => 0, 
+                'hunters_call' => 0, 
+                'athenas_fortune' => 0, 
+                'guardians_of_fortune' => 0, 
+                'servants_of_the_flame' => 0, 
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
             // Redirect to login after successful registration
             return redirect()->to('/login');
         } else {
