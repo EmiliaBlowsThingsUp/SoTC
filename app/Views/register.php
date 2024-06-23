@@ -10,6 +10,13 @@
                     <h5 class="card-title mb-4">Register</h5>
                     <form action="<?php echo base_url('/register'); ?>" method="post">
                         <div class="mb-3">
+                            <label for="username" class="form-label">Enter your Username:</label>
+                            <input type="username" class="form-control" id="username" name="username" value="<?= set_value('username') ?>">
+                            <?php if(isset($validation)):?>
+                                <small class="text-danger"><?= $validation->getError('username') ?></small>
+                            <?php endif;?>
+                        </div>
+                        <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="email" name="email" value="<?= set_value('email') ?>">
                             <?php if(isset($validation)):?>

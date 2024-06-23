@@ -8,12 +8,14 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->setDefaultController('Home');
 $routes->get('/', 'Home::index');
-$routes->get('/register', 'Register::index', ['filter' => 'guestFilter']);
-$routes->post('/register', 'Register::register', ['filter' => 'guestFilter']);
- 
-$routes->get('/login', 'Login::index', ['filter' => 'guestFilter']);
-$routes->post('/login', 'Login::authenticate', ['filter' => 'guestFilter']);
- 
-$routes->get('/logout', 'Login::logout', ['filter' => 'authFilter']);
-$routes->get('/dashboard', 'Dashboard::index', ['filter' => 'authFilter']);
+
+$routes->get('login', 'LoginController::index', ['filter' => 'guest']);
+$routes->post('login', 'LoginController::login', ['filter' => 'guest']);
+
+$routes->get('logout', 'LoginController::logout');
+
+$routes->get('register', 'RegisterController::index', ['filter' => 'guest']);
+$routes->post('register', 'RegisterController::register', ['filter' => 'guest']);
+
+$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
 $routes->post('dashboard/update-gold-count/(:num)', 'Dashboard::updateGoldCount/$1', ['filter' => 'auth']);
