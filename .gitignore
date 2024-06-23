@@ -14,3 +14,5 @@
 .vs/slnx.sqlite
 *.sqlite
 /system
+/app/.vscode
+app/.vscode/extensions.json
