@@ -32,7 +32,9 @@
                         </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary btn-block">Register Now</button>
+                            
                             <p class="text-center">Have already an account <a href="<?php echo base_url('/login'); ?>">Login here</a><p>
+                            <p class="text-center">Forgot password <a href="<?php echo base_url('/pasasword_reset'); ?>">Reset password</a><p>
                         </div>
                     </form>
                 </div>
