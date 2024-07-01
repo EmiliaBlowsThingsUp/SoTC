@@ -48,228 +48,64 @@
                     </div>
                 </div>
             <?php endforeach; ?>
-
-            <!-- This card is for the Gold Hoarders Level -->
-<?php foreach ($gold_hoarders as $gold_hoarder): ?>
+<div class="row">
     <div class="col-md-4">
         <div class="card mb-4">
             <img src="https://cdn.wallpapersafari.com/30/83/zx5APm.jpg" class="card-img-top" alt="">
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card mb-4">
             <div class="card-body">
-                <h5 class="card-title">Gold Hoarders</h5>
-                <p class="card-text">Current Gold Hoarders Level: <?= $gold_hoarder['gold_hoarders'] ?></p>
-                <p class="card-text"><small class="text-muted">Last updated: <?= $gold_hoarder['updated_at'] ?></small></p>
-
-                <?php if (session()->has('hoarders_difference') && session()->getFlashdata('hoarders_id') == $gold_hoarder['id']): ?>
-                    <p class="card-text">
-                        Levels Gained: <?= session()->getFlashdata('hoarders_difference') ?>
-                    </p>
-                <?php endif; ?>
-
-                <form action="/dashboard/update-gold-hoarders/<?= $gold_hoarder['id'] ?>" method="post">
+                <h5 class="card-title">Emissary Levels</h5>
+                <form action="/dashboard/update-emissaries" method="post">
                     <?= csrf_field() ?>
-                    <label for="gold_hoarders">Gold Hoarders Level:</label>
-                    <input type="number" name="gold_hoarders" id="gold_hoarders" value="<?= $gold_hoarder['gold_hoarders'] ?>" required>
-                    <button type="submit">Update</button>
+
+                    <div class="row">
+                        <?php 
+                        // Define factions and their respective data
+                        $factions = [
+                            'Gold Hoarders' => $gold_hoarders,
+                            'Order of Souls' => $order_of_souls,
+                            'Merchant Alliance' => $merchant_alliance,
+                            'Reapers Bones' => $reapers_bones,
+                            'Hunters Call' => $hunters_call,
+                            'Athenas Fortune' => $athenas_fortune,
+                            'Guardians of Fortune' => $guardians_of_fortune,
+                            'Servants of the Flame' => $servants_of_the_flame,
+                        ];
+
+                        foreach ($factions as $title => $faction_data): 
+                            // Define dynamic keys based on faction names
+                            $key = strtolower(str_replace(' ', '_', $title));
+                        ?>
+                            <div class="col-md-4">
+                                <h6><?= $title ?></h6>
+                                <?php foreach ($faction_data as $faction): ?>
+                                    <p class="card-text">Current <?= $title ?> Level: <?= $faction[$key] ?></p>
+                                    <p class="card-text"><small class="text-muted">Last updated: <?= $faction['updated_at'] ?></small></p>
+
+                                    <?php if (session()->has($key . '_difference') && session()->getFlashdata($key . '_id') == $faction['id']): ?>
+                                        <p class="card-text">
+                                            Levels Gained: <?= session()->getFlashdata($key . '_difference') ?>
+                                        </p>
+                                    <?php endif; ?>
+
+                                    <label for="<?= $key ?>_<?= $faction['id'] ?>">Level:</label>
+                                    <input type="number" name="<?= $key ?>[<?= $faction['id'] ?>]" id="<?= $key ?>_<?= $faction['id'] ?>" value="<?= $faction[$key] ?>" required>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update All</button>
                 </form>
             </div>
         </div>
     </div>
-<?php endforeach; ?>
-
-<!-- This card is for the Order of Souls Level -->
-<?php foreach ($order_of_souls as $order_of_soul): ?>
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <img src="https://cdn.wallpapersafari.com/30/83/zx5APm.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Order of Souls</h5>
-                <p class="card-text">Current Order of Souls Level: <?= $order_of_soul['order_of_souls'] ?></p>
-                <p class="card-text"><small class="text-muted">Last updated: <?= $order_of_soul['updated_at'] ?></small></p>
-
-                <?php if (session()->has('souls_difference') && session()->getFlashdata('souls_id') == $order_of_soul['id']): ?>
-                    <p class="card-text">
-                        Levels Gained: <?= session()->getFlashdata('souls_difference') ?>
-                    </p>
-                <?php endif; ?>
-
-                <form action="/dashboard/update-order-of-souls/<?= $order_of_soul['id'] ?>" method="post">
-                    <?= csrf_field() ?>
-                    <label for="order_of_souls">Order of Souls Level:</label>
-                    <input type="number" name="order_of_souls" id="order_of_souls" value="<?= $order_of_soul['order_of_souls'] ?>" required>
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-
 </div>
 
-<div class="row">
-<!-- This card is for the Merchant Alliance Level -->
-<?php foreach ($gold_hoarders as $gold_hoarder): ?>
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <img src="https://cdn.wallpapersafari.com/30/83/zx5APm.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Gold Hoarders</h5>
-                <p class="card-text">Current Gold Hoarders Level: <?= $gold_hoarder['gold_hoarders'] ?></p>
-                <p class="card-text"><small class="text-muted">Last updated: <?= $gold_hoarder['updated_at'] ?></small></p>
 
-                <?php if (session()->has('hoarders_difference') && session()->getFlashdata('hoarders_id') == $gold_hoarder['id']): ?>
-                    <p class="card-text">
-                        Levels Gained: <?= session()->getFlashdata('hoarders_difference') ?>
-                    </p>
-                <?php endif; ?>
-
-                <form action="/dashboard/update-gold-hoarders/<?= $gold_hoarder['id'] ?>" method="post">
-                    <?= csrf_field() ?>
-                    <label for="gold_hoarders">Gold Hoarders Level:</label>
-                    <input type="number" name="gold_hoarders" id="gold_hoarders" value="<?= $gold_hoarder['gold_hoarders'] ?>" required>
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-<!-- This card is for the Reapers Bones Level -->
-<?php foreach ($gold_hoarders as $gold_hoarder): ?>
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <img src="https://cdn.wallpapersafari.com/30/83/zx5APm.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Gold Hoarders</h5>
-                <p class="card-text">Current Gold Hoarders Level: <?= $gold_hoarder['gold_hoarders'] ?></p>
-                <p class="card-text"><small class="text-muted">Last updated: <?= $gold_hoarder['updated_at'] ?></small></p>
-
-                <?php if (session()->has('hoarders_difference') && session()->getFlashdata('hoarders_id') == $gold_hoarder['id']): ?>
-                    <p class="card-text">
-                        Levels Gained: <?= session()->getFlashdata('hoarders_difference') ?>
-                    </p>
-                <?php endif; ?>
-
-                <form action="/dashboard/update-gold-hoarders/<?= $gold_hoarder['id'] ?>" method="post">
-                    <?= csrf_field() ?>
-                    <label for="gold_hoarders">Gold Hoarders Level:</label>
-                    <input type="number" name="gold_hoarders" id="gold_hoarders" value="<?= $gold_hoarder['gold_hoarders'] ?>" required>
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-<!-- This card is for the Hunter's Call Level -->
-<?php foreach ($gold_hoarders as $gold_hoarder): ?>
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <img src="https://cdn.wallpapersafari.com/30/83/zx5APm.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Gold Hoarders</h5>
-                <p class="card-text">Current Gold Hoarders Level: <?= $gold_hoarder['gold_hoarders'] ?></p>
-                <p class="card-text"><small class="text-muted">Last updated: <?= $gold_hoarder['updated_at'] ?></small></p>
-
-                <?php if (session()->has('hoarders_difference') && session()->getFlashdata('hoarders_id') == $gold_hoarder['id']): ?>
-                    <p class="card-text">
-                        Levels Gained: <?= session()->getFlashdata('hoarders_difference') ?>
-                    </p>
-                <?php endif; ?>
-
-                <form action="/dashboard/update-gold-hoarders/<?= $gold_hoarder['id'] ?>" method="post">
-                    <?= csrf_field() ?>
-                    <label for="gold_hoarders">Gold Hoarders Level:</label>
-                    <input type="number" name="gold_hoarders" id="gold_hoarders" value="<?= $gold_hoarder['gold_hoarders'] ?>" required>
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-</div>
-
-<div class="row">
-<!-- This card is for the Athena's Fortune Level -->
-<?php foreach ($gold_hoarders as $gold_hoarder): ?>
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <img src="https://cdn.wallpapersafari.com/30/83/zx5APm.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Gold Hoarders</h5>
-                <p class="card-text">Current Gold Hoarders Level: <?= $gold_hoarder['gold_hoarders'] ?></p>
-                <p class="card-text"><small class="text-muted">Last updated: <?= $gold_hoarder['updated_at'] ?></small></p>
-
-                <?php if (session()->has('hoarders_difference') && session()->getFlashdata('hoarders_id') == $gold_hoarder['id']): ?>
-                    <p class="card-text">
-                        Levels Gained: <?= session()->getFlashdata('hoarders_difference') ?>
-                    </p>
-                <?php endif; ?>
-
-                <form action="/dashboard/update-gold-hoarders/<?= $gold_hoarder['id'] ?>" method="post">
-                    <?= csrf_field() ?>
-                    <label for="gold_hoarders">Gold Hoarders Level:</label>
-                    <input type="number" name="gold_hoarders" id="gold_hoarders" value="<?= $gold_hoarder['gold_hoarders'] ?>" required>
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-<!-- This card is for the Guardians of Fortune Level -->
-<?php foreach ($gold_hoarders as $gold_hoarder): ?>
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <img src="https://cdn.wallpapersafari.com/30/83/zx5APm.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Gold Hoarders</h5>
-                <p class="card-text">Current Gold Hoarders Level: <?= $gold_hoarder['gold_hoarders'] ?></p>
-                <p class="card-text"><small class="text-muted">Last updated: <?= $gold_hoarder['updated_at'] ?></small></p>
-
-                <?php if (session()->has('hoarders_difference') && session()->getFlashdata('hoarders_id') == $gold_hoarder['id']): ?>
-                    <p class="card-text">
-                        Levels Gained: <?= session()->getFlashdata('hoarders_difference') ?>
-                    </p>
-                <?php endif; ?>
-
-                <form action="/dashboard/update-gold-hoarders/<?= $gold_hoarder['id'] ?>" method="post">
-                    <?= csrf_field() ?>
-                    <label for="gold_hoarders">Gold Hoarders Level:</label>
-                    <input type="number" name="gold_hoarders" id="gold_hoarders" value="<?= $gold_hoarder['gold_hoarders'] ?>" required>
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-<!-- This card is for the Servants of the Flame Level -->
-<?php foreach ($gold_hoarders as $gold_hoarder): ?>
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <img src="https://cdn.wallpapersafari.com/30/83/zx5APm.jpg" class="card-img-top" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Gold Hoarders</h5>
-                <p class="card-text">Current Gold Hoarders Level: <?= $gold_hoarder['gold_hoarders'] ?></p>
-                <p class="card-text"><small class="text-muted">Last updated: <?= $gold_hoarder['updated_at'] ?></small></p>
-
-                <?php if (session()->has('hoarders_difference') && session()->getFlashdata('hoarders_id') == $gold_hoarder['id']): ?>
-                    <p class="card-text">
-                        Levels Gained: <?= session()->getFlashdata('hoarders_difference') ?>
-                    </p>
-                <?php endif; ?>
-
-                <form action="/dashboard/update-gold-hoarders/<?= $gold_hoarder['id'] ?>" method="post">
-                    <?= csrf_field() ?>
-                    <label for="gold_hoarders">Gold Hoarders Level:</label>
-                    <input type="number" name="gold_hoarders" id="gold_hoarders" value="<?= $gold_hoarder['gold_hoarders'] ?>" required>
-                    <button type="submit">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-        </div>
     </div>
         </div>
     </div>
