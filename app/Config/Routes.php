@@ -17,7 +17,9 @@ $routes->get('logout', 'LoginController::logout');
 $routes->get('register', 'RegisterController::index', ['filter' => 'guest']);
 $routes->post('register', 'RegisterController::register', ['filter' => 'guest']);
 
-$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);
-$routes->post('dashboard/update-gold-count/(:num)', 'Dashboard::updateGoldCount/$1', ['filter' => 'auth']);
-$routes->post('dashboard/update-gold-hoarders/(:num)', 'Dashboard::updateGoldHoarders/$1', ['filter' => 'auth']);
-$routes->post('dashboard/update-order-of-souls/(:num)', 'Dashboard::updateOrderofSouls/$1', ['filter' => 'auth']);
+$routes->group('dashboard', ['filter' => 'auth'], function($routes) {
+    $routes->get('/', 'Dashboard::index');
+
+    // Route for updating multiple emissaries
+    $routes->post('update-emissaries', 'Dashboard::updateEmissaries');
+});
