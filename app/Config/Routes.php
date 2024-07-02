@@ -17,6 +17,9 @@ $routes->get('logout', 'LoginController::logout');
 $routes->get('register', 'RegisterController::index', ['filter' => 'guest']);
 $routes->post('register', 'RegisterController::register', ['filter' => 'guest']);
 
+
+$routes->post('dashboard/update-gold-count/(:num)', 'Dashboard::updateGoldCount/$1');
+
 $routes->group('dashboard', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'Dashboard::index');
 
