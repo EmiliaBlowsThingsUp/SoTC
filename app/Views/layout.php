@@ -7,7 +7,7 @@
 </head>
    <body>
 
-<<!-- This is the Nav Bar -->
+<!-- This is the Nav Bar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand">Sea of Thieves Compendium</a>
